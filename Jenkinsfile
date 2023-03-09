@@ -29,6 +29,16 @@ pipeline {
         }
 
       }
+      
+      post {
+        success {
+          echo 'Code quality check passed'
+        }
+        
+        failure {
+          echo 'Code quality check failed'
+        }
+      }
     }
 
     stage('Publish') {
