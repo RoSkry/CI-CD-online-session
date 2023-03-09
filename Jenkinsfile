@@ -11,6 +11,7 @@ pipeline {
              mount
              python3 -m venv .venv
              . .venv/bin/activate
+             pip install pylint
              pylint --exit-zero --report=y --output-format=json:pylint-report.json,colorized ./*.py
              '''
            }
