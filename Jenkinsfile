@@ -1,14 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('code-quality) {
+    stage('code-quality') {
        steps {
          script {
            docker.image('python:3.9').inside {c -> 
              sh '''
+             ls -la
+             pwd
+             mount
              python3 -m venv .venv
              . .venv/bin/activate
-             pylint --exit-zero --report=y --output-format-json:pylint-report.json,colorized ./*.py
+             pylint --exit-zero --report=y --output-format=json:pylint-report.json,colorized ./*.py
              '''
            }
          }
