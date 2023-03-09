@@ -16,7 +16,7 @@ pipeline {
              pylint --exit-zero --report=y --output-format=json:pylint-report.json,colorized ./*.py
              '''
              
-             publishHTML target : {
+             publishHTML target : [
                allowMissing: true,
                alwaysLinkToLastBuild: true,
                keepAll: true,
@@ -24,7 +24,7 @@ pipeline {
                reportFiles: 'pylint-report.json',
                reportName: 'pylint Scan',
                reportTitles: 'pylint Scan'
-             }
+             ]
            }
          }
        }
