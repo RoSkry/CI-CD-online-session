@@ -61,7 +61,7 @@ pipeline {
     
     stage('Validation') {
       steps {
-        sh 'curl -i http://localhost:9005/test_string'
+        sh 'curl -i http://localhost:9000/test_string'
       }
     }
 
