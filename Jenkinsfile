@@ -70,19 +70,8 @@ pipeline {
     stage('Scan Docker Image for Vulnerabilities') {
       steps {
         script {
-          sh 'mkdir -p reports'
-          sh 'curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl > html.tpl'
           def vulnerabilities = sh(script: "trivy image --exit-code 0 --severity HIGH,MEDIUM,LOW --format template --template '@html.tpl' -o reports/image-scan.html --no-progress ${registry}:${env.BUILD_ID}", returnStdout: true).trim()
           echo "Vulnerability Report:\n${vulnerabilities}"
-          publishHTML target : [
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'reports',
-                    reportFiles: 'image-scan.html',
-                    reportName: 'Trivy Scan',
-                    reportTitles: 'Trivy Scan'
-                ]
         }
       }
     }
