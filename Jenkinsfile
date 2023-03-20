@@ -55,6 +55,12 @@ pipeline {
         sh 'docker stop flask-app || true; docker rm flask-app || true;docker run -d --name flask-app -p 9000:9000 rostdocker/flask-app:latest'
       }
     }
+    
+    stage('Validation') {
+      steps {
+        sh 'curl -i http://localhost:9000/test_string'
+      }
+    }
 
   }
   environment {
